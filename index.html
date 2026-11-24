@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pouches</title>
+<meta name="description" content="Help and privacy for Pouches, a packing list that gets better every trip.">
+<meta property="og:title" content="Pouches">
+<meta property="og:description" content="A packing list that gets better every trip.">
+<meta property="og:image" content="https://ritotn.github.io/pouches/icon.png">
+<!-- Safari's own banner to get or open the app. Add on launch day, with the app's ID: -->
+<!-- <meta name="apple-itunes-app" content="app-id=[app-id]"> -->
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, sans-serif; line-height: 1.5; max-width: 34em; margin: 3em auto; padding: 0 1.25em; }
+  /* iPhone and iPad only: text follows the Text Size setting. (On a Mac this keyword is 13 px, too small.) */
+  @supports (-webkit-touch-callout: none) { body { font: -apple-system-body; font-family: system-ui, sans-serif; line-height: 1.5; } }
+  /* The app's coral, in its higher-contrast shade on white, so links pass WCAG AA (4.5:1) in both modes. */
+  a { color: light-dark(#C94A26, #FF7A50); }
+  .icon { width: 96px; height: 96px; border-radius: 22.5%; }
+</style>
+</head>
+<body>
+<main>
+<picture>
+  <source srcset="icon-dark.png" media="(prefers-color-scheme: dark)">
+  <img class="icon" src="icon.png" alt="">
+</picture>
+<h1>Pouches</h1>
+<p>A packing list that gets better every trip.</p>
+<!-- Launch day, with the app's ID: <p><a href="https://apps.apple.com/app/id[app-id]">Get Pouches on the App Store</a>, free for iPhone.</p> -->
+
+<h2 id="support">Support</h2>
+<p>Questions, problems, or ideas? Email <a href="mailto:pouchesapp@gmail.com">pouchesapp@gmail.com</a></p>
+
+<h3>I already have a list. Do I have to retype it?</h3>
+<p>Nope! Copy it from Notes or anywhere else and paste it into New Item. Each line becomes an item, and a line like “Clothes:” starts a section.</p>
+
+<h3>How do I reuse a trip?</h3>
+<p>On the Trips list, swipe right on the trip and tap Duplicate. For trips you reuse often, tap Pin instead: they stay at the top, and you can pick them in Start From when you add a trip.</p>
+
+<h3>How does Didn’t Use work?</h3>
+<p>After a trip, swipe right on anything you didn’t need. When you duplicate that trip or start from it, those items say “Unused last trip” until you pack or delete them.</p>
+
+<h3>My trips aren’t on my other device.</h3>
+<p>Check that both devices use the same Apple Account, and that iCloud is on for Pouches in Settings › your name › iCloud.</p>
+
+<h3>I deleted a trip by mistake.</h3>
+<p>It’s safe in Recently Deleted, the last row of the Trips list, for 30 days. Open it and tap Recover.</p>
+
+<h3>How do I back up my trips?</h3>
+<p>On the Trips list, tap the More button (⋯), then Export Trips. That saves every trip as one file, which Import Trips reads back in. It’s plain JSON, so other apps and scripts can read it too. <a href="https://github.com/ritotn/pouches/blob/main/FORMAT.md">See the file format</a>.</p>
+
+<h2 id="privacy">Privacy Policy</h2>
+<p>Pouches has no ads and collects no data.</p>
+<p>Your trips stay on your device and, if iCloud is on, in your iCloud account.</p>
+<p>To delete them, delete the app. To delete the iCloud copy too, go to Settings › your name › iCloud › Storage, tap Pouches, and delete its data.</p>
+</main>
+</body>
+</html>
