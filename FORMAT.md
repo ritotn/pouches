@@ -1,6 +1,6 @@
 # The pouch format
 
-A pouch is a JSON file of trips. Files end in `.pouch`.
+A pouch is a JSON file of trips, ending in `.pouch`.
 
 ```json
 {
@@ -30,70 +30,36 @@ A pouch is a JSON file of trips. Files end in `.pouch`.
 
 ## File
 
-| Key | Type | |
+| Key | Type | Notes |
 |---|---|---|
-| `format` | `"pouch"` | required |
-| `version` | number | required, `1` |
-| `trips` | list of trips | required |
+| `format` | string | required; `"pouch"` |
+| `version` | integer | required; `1` |
+| `trips` | array of trips | required |
 
 ## Trip
 
-| Key | Type | |
+| Key | Type | Notes |
 |---|---|---|
-| `id` | UUID | required |
-| `name` | text | required |
-| `start`, `end` | date, `"2026-06-04"` | required; `end` is on or after `start` |
-| `sections` | list of sections | required, in order |
+| `id` | string | required; UUID |
+| `name` | string | required |
+| `start`, `end` | string | required; `YYYY-MM-DD`, `end` ≥ `start` |
+| `sections` | array of sections | required |
 
 ## Section
 
-| Key | Type | |
+| Key | Type | Notes |
 |---|---|---|
-| `name` | text | required; no two in a trip share a name, ignoring case |
-| `items` | list of items | in order; can be empty |
+| `name` | string | required; unique in its trip, ignoring case |
+| `items` | array of items | default `[]` |
 
 ## Item
 
-| Key | Type | Default | |
-|---|---|---|---|
-| `id` | UUID | new | |
-| `name` | text | required | |
-| `amount` | whole number, 1 or more | `1` | |
-| `packed` | true / false | `false` | in the bag right now |
-| `used` | true / false | missing | `false` didn't use, `true` used, missing: not reviewed |
+| Key | Type | Notes |
+|---|---|---|
+| `id` | string | UUID, same across copies of a trip |
+| `name` | string | required |
+| `amount` | integer | ≥ 1, default `1` |
+| `packed` | boolean | default `false` |
+| `used` | boolean | missing: not reviewed |
 
-Dates have no time or time zone. UUIDs can be upper- or lowercase.
-
-An item keeps its `id` from trip to trip: copying a trip copies its items' ids and gives the trip a new one.
-
-A trip is reviewed once any of its items has `used`.
-
-## History
-
-An item's history is every earlier reviewed trip that has it, most recent first. Its unused streak counts
-back from the latest of those while it was unused, skipping trips where it has no `used`. History isn't stored.
-
-## Extra keys
-
-Data this format doesn't cover, like Pouches' pinned trips, goes in an object whose name starts with `x-`:
-`"x-pouches": { "pinned": true }`. Unknown keys are ignored and kept when possible.
-
-## Reading
-
-- A trip with a missing name, a bad date, or `end` before `start` is skipped; the rest still read.
-- A repeated trip `id` keeps the first. A repeated item `id` in a trip gets a new one.
-- An `amount` below 1 reads as 1.
-- Two sections that differ only in case are merged into the first.
-- A `version` other than 1 isn't read.
-
-Importing keeps ids and skips trips that are already there. Opening someone else's trip starts a new one
-with new ids.
-
-## Sharing
-
-A shared pouch leaves out ids, exact dates, and `packed`, and gives each trip `month` (`"2026-06"`) and `days`
-(its length) instead.
-
-## Changes
-
-New optional keys keep version 1. Anything that would make an older app misread a file gets a new version.
+Keys starting with `x-` hold app data, like `"x-pouches": { "pinned": true }`. Readers ignore unknown keys.
